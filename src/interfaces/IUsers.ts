@@ -1,9 +1,9 @@
 export interface IUser {
-  name: String;
-  email: String;
-  password?: String;
-  img?: String;
+  name: string;
+  email: string;
+  password?: string;
+  img?: string;
   rol: "ADMIN_ROLE" | "USER_ROLE";
-  estado: Boolean;
-  google?: Boolean;
+  estado: boolean;
+  google?: boolean;
 }
