@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose";
-import { IUser } from "../interfaces/IUsers";
+import { Create_User } from "../interfaces/Create_IUsers";
 import e from "express";
 
-const UserSchema = new Schema<IUser>({
+const UserSchema = new Schema<Create_User>({
   name: {
     type: String,
     required: [true, "El nombre es obligatorio"],
@@ -12,7 +12,6 @@ const UserSchema = new Schema<IUser>({
     required: [true, "El correo es obligatorio"],
     unique: true,
   },
-
   password: {
     type: String,
     required: [true, "La contraseña es obligatoria"],
@@ -25,6 +24,11 @@ const UserSchema = new Schema<IUser>({
     type: String,
     required: true,
     enum: ["ADMIN_ROLE", "USER_ROLE"],
+  },
+  id: {
+    type: String,
+    required: [true, "El id es obligatorio"],
+    unique: true,
   },
   estado: {
     type: Boolean,
@@ -42,6 +46,6 @@ UserSchema.methods.toJSON = function () {
   return user;
 };
 
-const UserModel = model<IUser>("User", UserSchema);
+const UserModel = model<Create_User>("User", UserSchema);
 
 export default UserModel;
