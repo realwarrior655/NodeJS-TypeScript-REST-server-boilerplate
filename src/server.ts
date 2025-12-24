@@ -2,6 +2,7 @@ import express, { type Application } from "express";
 import cors from "cors";
 import { dbConnection } from "./database/config";
 import userRoutes from "./routes/user.routes";
+import authRoutes from "./routes/auth.routes";
 
 class Server {
   // 1. Declaración de propiedades con su tipo
@@ -42,8 +43,12 @@ class Server {
   }
 
   routes() {
-    // Aquí definiremos las rutas
+    //Ruta de Auth de login
+    this.app.use(this.apiPaths.auth, authRoutes);
+    // Aquí definiremos las rutas de usuario
     this.app.use(this.apiPaths.users, userRoutes);
+
+    // Ruta de prueba
     this.app.get("/", (req, res) => {
       res.json({ msg: "API Calistenia con TS funcionando" });
     });

@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 import { Create_User } from "../interfaces/Create_IUsers";
-import e from "express";
 
 const UserSchema = new Schema<Create_User>({
   name: {
@@ -30,7 +29,7 @@ const UserSchema = new Schema<Create_User>({
     required: [true, "El id es obligatorio"],
     unique: true,
   },
-  estado: {
+  status: {
     type: Boolean,
     default: true,
   },
