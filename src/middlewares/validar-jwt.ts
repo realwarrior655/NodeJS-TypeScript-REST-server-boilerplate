@@ -5,7 +5,7 @@ import UserModel from "../models/user.model";
 export const validarJWT = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const token = req.header("x-token");
   if (!token) {
@@ -17,7 +17,7 @@ export const validarJWT = async (
     // Verificar el token
     const { id } = jwt.verify(
       token,
-      process.env.SECRET_KEY_JWT || "default_secret_key"
+      process.env.SECRET_KEY_JWT || "default_secret_key",
     ) as { id: string };
 
     //Leer el usuario que corresponde al id
