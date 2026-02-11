@@ -4,6 +4,5 @@ export interface Create_Course {
   duration: number; // Duración en minutos
   level: "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
   img?: string;
-  id: string;
   status: boolean;
 }

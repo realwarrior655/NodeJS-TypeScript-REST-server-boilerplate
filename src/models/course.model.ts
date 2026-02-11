@@ -34,3 +34,7 @@ CourseSchema.methods.toJSON = function () {
   course.id = _id;
   return course;
 };
+
+const CourseModel = model<Create_Course>("Course", CourseSchema);
+
+export default CourseModel;

@@ -2,33 +2,40 @@ import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import UserModel from "../models/user.model";
 
-//OBTENER USERS
+//Get all users
 export const getUsers = async (req: Request, res: Response) => {
   res.json({
     msg: "getUsers - Controlador",
   });
 };
 
-//CREAR USERS
+//Create a new user
 export const postUser = async (req: Request, res: Response): Promise<void> => {
-  const { name, email, password, rol } = req.body;
-  const user = new UserModel({ name, email, password, rol });
+  try {
+    //destructuring de los datos que vienen en el body
+    const { name, email, password, rol } = req.body;
+    const user = new UserModel({ name, email, password, rol });
 
-  //Encriptar la contraseña (hash)
+    //Encriptar la contraseña (hash)
 
-  const salt = bcrypt.genSaltSync();
-  user.password = bcrypt.hashSync(password, salt);
+    const salt = bcrypt.genSaltSync();
+    user.password = bcrypt.hashSync(password, salt);
 
-  //Guardar en BD
-  await user.save();
+    //Guardar en BD
+    await user.save();
 
-  res.status(201).json({
-    msg: "Usuario creado correctamente",
-    user,
-  });
+    res.status(201).json({
+      msg: "Usuario creado correctamente",
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Error al crear el usuario",
+    });
+  }
 };
 
-//ACTUALIZAR USER
+//Update user
 export const putUser = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   const { _id, password, google, email, ...resto } = req.body;
@@ -46,14 +53,14 @@ export const putUser = async (req: Request, res: Response): Promise<void> => {
   res.json();
 };
 
-//BORRAR USER
+//Delete user
 export const delUser = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   const user = await UserModel.findByIdAndDelete(id);
   res.json();
 };
 
-//PERMITIR QUE USER SE BORRE A SI MISMO
+//Self-delete user
 export const delSelfUser = async (
   req: Request,
   res: Response,
@@ -64,5 +71,5 @@ export const delSelfUser = async (
     { estado: false },
     { new: true },
   );
-  res.json();
+  res.json(user);
 };
