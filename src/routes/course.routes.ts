@@ -9,6 +9,7 @@ import {
   putCourse,
   deleteCourse,
 } from "../controllers/course.controller";
+import lessonRouter from "./lesson.routes";
 
 //IMPORTS MIDDLEWARES
 import { validarCampos } from "../middlewares/validar-campos";
@@ -35,5 +36,8 @@ router.put("/:id", validarJWT, validarAdmin, putCourse);
 
 // DELETE - Solo admins pueden eliminar
 router.delete("/:id", validarJWT, validarAdmin, deleteCourse);
+
+// dentro de tu router de courses:
+router.use("/:courseId/lessons", lessonRouter);
 
 export default router;

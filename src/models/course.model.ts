@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { Create_Course } from "../interfaces/Create_iCourses";
+import { Schema, model, Types } from "mongoose";
+import { Create_Course } from "../interfaces/Create_ICourses";
 
 const CourseSchema = new Schema<Create_Course>({
   title: {
@@ -14,6 +14,7 @@ const CourseSchema = new Schema<Create_Course>({
     type: Number,
     required: [true, "La duración es obligatoria"],
   },
+  lessons: [{ type: Types.ObjectId, ref: "Lesson" }],
   level: {
     type: String,
     required: true,
