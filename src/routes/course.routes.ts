@@ -12,9 +12,10 @@ import {
 import lessonRouter from "./lesson.routes";
 
 //IMPORTS MIDDLEWARES
-import { validarCampos } from "../middlewares/validar-campos";
-import { validarJWT } from "../middlewares/validar-jwt";
-import { validarAdmin } from "../middlewares/validar-admin";
+import validarCampos from "../middlewares/validar-campos";
+import validarJWT from "../middlewares/validar-jwt";
+import validarAdmin from "../middlewares/validar-admin";
+import validarCursos from "../middlewares/validar-course";
 
 const router = Router();
 
@@ -38,6 +39,6 @@ router.put("/:id", validarJWT, validarAdmin, putCourse);
 router.delete("/:id", validarJWT, validarAdmin, deleteCourse);
 
 // dentro de tu router de courses:
-router.use("/:courseId/lessons", lessonRouter);
+router.use("/:courseId/lessons", validarCursos, lessonRouter);
 
 export default router;

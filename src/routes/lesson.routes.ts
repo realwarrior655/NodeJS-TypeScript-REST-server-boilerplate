@@ -11,7 +11,7 @@ import {
 } from "../controllers/lesson.controller";
 
 //IMPORT MIDDLEWARES
-import { validarAdmin } from "../middlewares/validar-admin";
+import validarAdmin from "../middlewares/validar-admin";
 
 const router = Router({ mergeParams: true });
 

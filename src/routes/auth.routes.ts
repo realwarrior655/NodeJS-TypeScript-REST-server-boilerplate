@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { check } from "express-validator";
 import { login } from "../controllers/auth.controller";
-import { validarCampos } from "../middlewares/validar-campos";
+import validarCampos from "../middlewares/validar-campos";
 
 //Inicializar el Router
 const router = Router();
@@ -15,6 +15,6 @@ router.post(
     check("password", "La contraseña es obligatoria").not().isEmpty(),
     validarCampos,
   ],
-  login
+  login,
 );
 export default router;

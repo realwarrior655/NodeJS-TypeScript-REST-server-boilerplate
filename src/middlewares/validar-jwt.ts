@@ -2,11 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import UserModel from "../models/user.model";
 
-export const validarJWT = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+const validarJWT = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.header("x-token");
   if (!token) {
     return res.status(401).json({
@@ -47,3 +43,5 @@ export const validarJWT = async (
     });
   }
 };
+
+export default validarJWT;

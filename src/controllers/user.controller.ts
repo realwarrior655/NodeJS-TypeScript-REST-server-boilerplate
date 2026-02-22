@@ -50,7 +50,7 @@ export const putUser = async (req: Request, res: Response): Promise<void> => {
 
   const user = await UserModel.findByIdAndUpdate(id, resto, { new: true });
 
-  res.json();
+  res.status(200).json(user);
 };
 
 //Delete user

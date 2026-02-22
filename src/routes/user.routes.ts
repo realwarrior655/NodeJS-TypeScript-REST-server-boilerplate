@@ -12,8 +12,8 @@ import {
 } from "../controllers/user.controller";
 
 //IMPORTS MIDDLEWARES
-import { validarCampos } from "../middlewares/validar-campos";
-import { validarJWT } from "../middlewares/validar-jwt";
+import validarCampos from "../middlewares/validar-campos";
+import validarJWT from "../middlewares/validar-jwt";
 
 const router = Router();
 //OBTENER USERS
@@ -30,7 +30,7 @@ router.post(
     check("email", "El correo no es válido").isEmail(),
   ],
   validarCampos,
-  postUser
+  postUser,
 );
 
 //ACTUALIZAR USER
@@ -42,7 +42,7 @@ router.put(
     check("rol").optional().isIn(["ADMIN_ROLE", "USER_ROLE"]),
     validarCampos,
   ],
-  putUser
+  putUser,
 );
 
 //BORRAR CUENTA PROPIA
@@ -52,7 +52,7 @@ router.delete("/self", validarJWT, delSelfUser);
 router.delete(
   "/:id",
   [validarJWT, check("id", "El ID no es válido").isMongoId(), validarCampos],
-  delUser
+  delUser,
 );
 
 export default router;

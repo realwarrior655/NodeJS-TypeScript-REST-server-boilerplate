@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import UserModel from "../models/user.model";
 
-export const validarAdmin = async (
+const validarAdmin = async (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -41,3 +41,5 @@ export const validarAdmin = async (
     });
   }
 };
+
+export default validarAdmin;
